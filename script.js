@@ -15,29 +15,64 @@ const current0Elem = document.getElementById("current--0");
 const current1Elem = document.getElementById("current--1");
 let activePlayer = 0;
 const scores = [0, 0];
+let playing = true;
+
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  currentScore = 0;
+  player0El.classList.toggle("player--active");
+  player1El.classList.toggle("player--active");
+};
 
 score0Elem.textContent = 0;
 score1Elem.textContent = 0;
 diceElem.classList.add("hidden");
 
 btnRoll.addEventListener("click", function () {
-  //1.generate a random dice roll
-  const dice = Math.trunc(Math.random() * 6) + 1;
+  if (playing) {
+    //1.generate a random dice roll
+    const dice = Math.trunc(Math.random() * 6) + 1;
 
-  //2. display dice
-  diceElem.classList.remove("hidden");
-  diceElem.src = `./assets/dice-${dice}.png`;
-  //3. Check for rolled 1: if true, switch to next player
-  if (dice !== 1) {
-    currentScore += dice;
-    document.getElementById(`current--${activePlayer}`).textContent =
-      currentScore;
-    //Add the dice to the current score
-  } else {
-    document.getElementById(`current--${activePlayer}`).textContent = 0;
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    currentScore = 0;
-    player0El.classList.toggle("player--active");
-    player1El.classList.toggle("player--active");
+    //2. display dice
+    diceElem.classList.remove("hidden");
+    diceElem.src = `./assets/dice-${dice}.png`;
+    //3. Check for rolled 1: if true, switch to next player
+    if (dice !== 1) {
+      currentScore += dice;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
+      //Add the dice to the current score
+    } else {
+      switchPlayer();
+    }
+  }
+});
+
+btnHold.addEventListener("click", function () {
+  if (playing) {
+    //1. Add current score to active players score
+    scores[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
+
+    //2. Check if player score is >=100
+    if (scores[activePlayer] >= 20) {
+      playing = false;
+      diceElem.classList.add("hidden");
+      btnHold.classList.add("hidden");
+      btnRoll.classList.add("hidden");
+      //finnish game
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add("player--winner");
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove("player--active");
+    } else {
+      switchPlayer;
+    }
+    //3. Switch to the next player
+    switchPlayer();
   }
 });
