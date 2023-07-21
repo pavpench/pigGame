@@ -31,6 +31,32 @@
       <button class="btn btn--roll">🎲 Roll dice</button>
       <button class="btn btn--hold">📥 Hold</button>
     </main>
+    <div class="modal">
+      <section class="rules">
+        <h4>Rules of the game</h4>
+        <p>
+          If any of the players rolls 1 the current player loses what he rolled
+          during his turn and its the other player's turn. If a player decides
+          to Hold his rolls, the points accumulated during his turn are added to
+          his score and its the next player's turn. The first to reach 100
+          points wins</p
+        >
+      </section>
+      <section class="player--names hidden">
+        <div>
+          <label for="player1">Player 1 name ?</label>
+          <input type="text" id="player1" />
+          <button class="btn ready--1">Ready</button>
+        </div>
+        <div>
+          <label for="player2">Player 2 name ?</label>
+          <input type="text" id="player2" />
+          <button class="btn ready--2">Ready</button>
+        </div>
+      </section>
+      <button class="btn btn--modal">Next</button>
+    </div>
+    <div class="overlay"></div>
     <script src="script.js"></script>
   </body>
 </html>

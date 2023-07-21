@@ -3,7 +3,8 @@
 //selecting elements
 const player0El = document.querySelector(".player--0");
 const player1El = document.querySelector(".player--1");
-
+const player0NameEl = document.querySelector("#name--0");
+const player1NameEl = document.querySelector("#name--1");
 const score0Elem = document.querySelector("#score--0");
 const score1Elem = document.getElementById("score--1");
 const diceElem = document.querySelector(".dice");
@@ -11,10 +12,46 @@ const btnNew = document.querySelector(".btn--new");
 const btnRoll = document.querySelector(".btn--roll");
 const btnHold = document.querySelector(".btn--hold");
 const btnNewGame = document.querySelector(".btn--new");
+const btnNextModal = document.querySelector(".btn--modal");
+const rulesModal = document.querySelector(".modal");
+const overlayModal = document.querySelector(".overlay");
+const rules = document.querySelector(".rules");
+const playerNamesModal = document.querySelector(".player--names");
+const player1 = document.querySelector("#player1");
+const player2 = document.querySelector("#player2");
+const btnPlayerReady1 = document.querySelector(".ready--1");
+const btnPlayerReady2 = document.querySelector(".ready--2");
 
 let scores, currentScore, activePlayer, playing;
 const current0Elem = document.getElementById("current--0");
 const current1Elem = document.getElementById("current--1");
+
+const openCloseModal = function () {
+  rulesModal.classList.toggle("hidden");
+  overlayModal.classList.toggle("hidden");
+};
+const modalSwitchContent = function () {
+  rules.classList.toggle("hidden");
+  playerNamesModal.classList.toggle("hidden");
+};
+
+btnNextModal.addEventListener("click", function () {
+  modalSwitchContent();
+  console.log(player1.value, player2.value);
+  if (player1.value || player2.value) {
+    btnNextModal.textContent = "Start!";
+    player1.value
+      ? (player0NameEl.textContent = player1.value)
+      : (player0NameEl.textContent = "Player 1");
+    player2.value
+      ? (player1NameEl.textContent = player2.value)
+      : (player1NameEl.textContent = "Player 2");
+  }
+
+  if (btnNextModal.textContent === "Start!") {
+    openCloseModal();
+  }
+});
 
 const init = function () {
   activePlayer = 0;
