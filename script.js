@@ -19,7 +19,10 @@ const rules = document.querySelector(".rules");
 const playerNamesModal = document.querySelector(".player--names");
 const player1 = document.querySelector("#player1");
 const player2 = document.querySelector("#player2");
-const btnPlayerReady1 = document.querySelector(".ready--1");
+const btnPlayerReady = [
+  document.querySelector(".ready--1"),
+  document.querySelector(".ready--2"),
+];
 const btnPlayerReady2 = document.querySelector(".ready--2");
 
 let scores, currentScore, activePlayer, playing;
@@ -34,19 +37,22 @@ const modalSwitchContent = function () {
   rules.classList.toggle("hidden");
   playerNamesModal.classList.toggle("hidden");
 };
+btnPlayerReady.forEach((element) => {
+  element.addEventListener("click", function () {
+    if (player1.value || player2.value) {
+      btnNextModal.textContent = "Start!";
+      player1.value
+        ? (player0NameEl.textContent = player1.value)
+        : (player0NameEl.textContent = "Player 1");
+      player2.value
+        ? (player1NameEl.textContent = player2.value)
+        : (player1NameEl.textContent = "Player 2");
+    }
+  });
+});
 
 btnNextModal.addEventListener("click", function () {
   modalSwitchContent();
-  console.log(player1.value, player2.value);
-  if (player1.value || player2.value) {
-    btnNextModal.textContent = "Start!";
-    player1.value
-      ? (player0NameEl.textContent = player1.value)
-      : (player0NameEl.textContent = "Player 1");
-    player2.value
-      ? (player1NameEl.textContent = player2.value)
-      : (player1NameEl.textContent = "Player 2");
-  }
 
   if (btnNextModal.textContent === "Start!") {
     openCloseModal();
