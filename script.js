@@ -23,7 +23,6 @@ const btnPlayerReady = [
   document.querySelector(".ready--1"),
   document.querySelector(".ready--2"),
 ];
-const btnPlayerReady2 = document.querySelector(".ready--2");
 
 let scores, currentScore, activePlayer, playing;
 const current0Elem = document.getElementById("current--0");
@@ -37,6 +36,7 @@ const modalSwitchContent = function () {
   rules.classList.toggle("hidden");
   playerNamesModal.classList.toggle("hidden");
 };
+
 btnPlayerReady.forEach((element) => {
   element.addEventListener("click", function () {
     if (player1.value || player2.value) {
