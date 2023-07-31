@@ -39,7 +39,7 @@ const modalSwitchContent = function () {
 
 btnPlayerReady.forEach((element) => {
   element.addEventListener("click", function () {
-    if (player1.value || player2.value) {
+    if (player1.value && player2.value) {
       btnNextModal.textContent = "Start!";
       player1.value
         ? (player0NameEl.textContent = player1.value)
@@ -88,6 +88,8 @@ const switchPlayer = function () {
   player1El.classList.toggle("player--active");
 };
 
+player0NameEl.textContent = "Player 1";
+player1NameEl.textContent = "Player 2";
 init();
 
 btnRoll.addEventListener("click", function () {
